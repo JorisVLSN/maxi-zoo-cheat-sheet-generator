@@ -1,26 +1,32 @@
-# Maxi Zoo Cheat Sheet Generator
+# Maxi Zoo Cheat Sheet Generator v1.2.0
 
-Geavanceerde Next.js-app voor het omzetten van Belgische Maxi Zoo folder-PDF's naar een bewerkbare A4-cheat-sheet.
+Next.js/Vercel-app die een Belgische Maxi Zoo-folder omzet naar een bewerkbare cheat sheet.
 
-## Functies
-- PDF-upload en tekstextractie in de browser
-- Gemini AI-parser met fallback
-- Maxi Zoo-specifieke categorieën
-- Handmatig corrigeren, toevoegen en verwijderen
-- A4-preview
-- Export naar PNG, PDF, Excel en PowerPoint
-- Vercel-ready, geen database nodig
+## Nieuwe visuele extractie
 
-## Lokaal
+- Rendert iedere PDF-pagina lokaal in de browser.
+- Koppelt promoties via `sourcePage` en tekstankers aan hun folderpagina.
+- Maakt automatisch een uitsnede uit het relevante paginavak.
+- Neemt de uitsnede mee in PNG, PDF en PowerPoint.
+- Laat per promotie een betere eigen productfoto uploaden of de foto verwijderen.
+- De geavanceerde modus kan productfoto's en automatische extractie aan/uit zetten.
+
+> De automatische uitsnede is bewust controleerbaar: complexe folderlayouts kunnen soms meer dan één product in een vak bevatten. Gebruik dan **Foto vervangen**.
+
+## Installeren
+
 ```bash
 npm install
 cp .env.example .env.local
 npm run dev
 ```
 
-## Vercel
-1. Importeer de GitHub-repository in Vercel.
-2. Voeg `GEMINI_API_KEY` toe bij Environment Variables.
-3. Deploy.
+Voor AI-parsing:
 
-De app werkt zonder sleutel met een eenvoudige fallback, maar de beste folderherkenning vereist Gemini.
+```env
+GEMINI_API_KEY=...
+```
+
+## Vercel
+
+Importeer de GitHub-repository in Vercel en voeg `GEMINI_API_KEY` toe bij Environment Variables.
