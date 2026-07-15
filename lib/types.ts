@@ -1,23 +1,10 @@
-export const categories = ["Kat","Hond","Accessoires","Konijnen & knaagdieren","Vogels & kippen","Maxi Deals","Maxi Zoo Friends","Outlet","Overig"] as const;
-export type Category = typeof categories[number];
-export type Promo = {
-  id: string;
-  brand: string;
-  product: string;
-  category: Category;
-  offer: string;
-  price?: string;
-  validFrom?: string;
-  validUntil?: string;
-  friendsOnly?: boolean;
-  maxiDeal?: boolean;
-  outlet?: boolean;
-  notes?: string;
-  sourcePage?: number;
-};
-export type ParseResult = {
-  title: string;
-  period: string;
-  promos: Promo[];
-  warnings: string[];
-};
+export const animalCategories = ["Cat", "Dog", "Rabbit and rodents", "Bird", "Fish", "Accessories", "Maxi Deals", "Maxi Zoo Friends", "Outlet"] as const;
+export type AnimalCategory = (typeof animalCategories)[number];
+export const promotionTypes = ["Percentage discount", "Multi-buy", "Free item", "Fixed price", "Friends price", "Maxi Deal", "Outlet", "Other"] as const;
+export type PromotionType = (typeof promotionTypes)[number];
+export type Bounds = { x:number; y:number; width:number; height:number; pageWidth:number; pageHeight:number };
+export type Promotion = { id:string; brand:string; productName:string; description:string; animalCategory:AnimalCategory; promotionType:PromotionType; promotionText:string; normalPrice:string; promotionalPrice:string; unitPrice:string; validFrom:string; validUntil:string; sourcePage:number; sourceBounds?:Bounds; productImage:string; isFriendsOffer:boolean; isMaxiDeal:boolean; isOutlet:boolean; isPickAndMix:boolean; notes:string; confidence:number; validationWarnings:string[]; changeStatus?:"new"|"changed"|"expired"|"unchanged" };
+export type PdfPage = { pageNumber:number; image:string; width:number; height:number; text:string };
+export type Folder = { id:string; name:string; importedAt:string; period:string; promotions:Promotion[]; pages:PdfPage[] };
+export type Settings = { compact:boolean; showImages:boolean; showNotes:boolean; highlightStrongDeals:boolean; autoCrop:boolean; columns:1|2; minConfidence:number };
+export const emptyPromotion = ():Promotion => ({ id:crypto.randomUUID(), brand:"", productName:"Nieuw product", description:"", animalCategory:"Accessories", promotionType:"Other", promotionText:"Nieuwe promotie", normalPrice:"", promotionalPrice:"", unitPrice:"", validFrom:"", validUntil:"", sourcePage:1, productImage:"", isFriendsOffer:false, isMaxiDeal:false, isOutlet:false, isPickAndMix:false, notes:"", confidence:1, validationWarnings:["Controleer de nieuwe promotie."] });
